@@ -1,0 +1,48 @@
+upstream YOUR_APP_NAME {
+    server localhost:5000;
+}
+
+server {
+    listen YOUR_SERVER_IP:80 default_server;    # e.g., listen 127.0.0.1:80;
+    server_name YOUR_SERVER_FQDN;               # e.g., www.example.com;
+    root /var/www/YOUR_APP_NAME;
+
+    # individual nginx logs for this host
+    access_log  /var/log/nginx/YOUR_APP_NAME_assess.log;
+    error_log   /var/log/nginx/YOUR_APP_NAME_error.log;
+
+    location / {
+        # serve static files from defined root folder; @YOUR_APP_NAME is a named
+        # location for the upstream fallback, see below
+        try_files $uri $uri/index.html $uri.html @YOUR_APP_NAME;
+    }
+
+    # strips away revision info from static assets (flask-staticutils)
+    location /static/ {
+        rewrite  "^/static/(.*)-[a-zA-Z0-9]{12}\.(css|js)$" /static/$1.$2 break;
+        expires 30d;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+    }
+
+    # if a file, which is not found in the root folder is requested, then the
+    # proxy pass the request to the upsteam
+    location @YOUR_APP_NAME {
+        proxy_set_header Host              $http;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        client_max_body_size        10m;
+        client_body_buffer_size     128k;
+        proxy_connect_timeout       60s;
+        proxy_send_timeout          90s;
+        proxy_read_timeout          90s;
+        proxy_buffering             off;
+        proxy_temp_file_write_size  64k;
+        proxy_redirect              off;
+
+        proxy_pass http://YOUR_APP_NAME;
+    }
+}
+
