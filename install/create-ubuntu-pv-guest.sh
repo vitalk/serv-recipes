@@ -9,7 +9,7 @@ if [ -f /etc/xen/auto/$my_domu_name.cfg ]; then
     exit 0
 fi
 wget https://raw.github.com/vitalk/serv-recipes/master/xen/ubuntu.cfg -O /etc/xen/$my_domu_name.cfg
-ln -s /etc/xen/{,auto/}$my_domu_name.cfg
+ln -s /etc/xen/$my_domu_name.cfg /etc/xen/auto/$my_domu_name.cfg
 
 sed -i "s/YOUR_DOMU_NAME/$my_domu_name/" /etc/xen/$my_domu_name.cfg
 sed -i "s/YOUR_DOMU_MEMORY/$my_domu_memory/" /etc/xen/$my_domu_name.cfg
