@@ -4,7 +4,7 @@
 
 
 # setup the initial guest configuration
-if [ -f /etc/xen/auto/$my_domu_name.cfg ]; then
+if [ -f /etc/xen/$my_domu_name.cfg ]; then
     echo "The domU with name $my_domu_name already exists. Exiting..."
     exit 0
 fi
