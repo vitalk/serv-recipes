@@ -3,8 +3,8 @@ upstream YOUR_APP_NAME {
 }
 
 server {
-    listen YOUR_SERVER_IP:80 default_server;    # e.g., listen 127.0.0.1:80;
-    server_name YOUR_SERVER_FQDN;               # e.g., www.example.com;
+    listen YOUR_SERVER_IP:80 default_server;    # e.g., listen 127.0.0.1:80 default_server;
+    server_name YOUR_SERVER_FQDN;               # e.g., server_name www.example.com;
     root /var/www/YOUR_APP_NAME;
 
     # individual nginx logs for this host
