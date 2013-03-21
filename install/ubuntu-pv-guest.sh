@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # Create a ubuntu PV guest VM
+#
+# Note: list of the official ubuntu mirrors available on https://launchpad.net/ubuntu/+archivemirrors
 # Usage: curl https://raw.github.com/vitalk/serv-recipes/master/install/ubuntu-pv-guest.sh | my_mirror=http://ftp.byfly.by/ubuntu my_domu_name=ubuntu my_vif_ip=192.168.1.99 my_vif_mac=00:16:3E:E0:4D:50 my_domu_memory=256 sh
 
 
