@@ -8,7 +8,7 @@ server {
     root /var/www/YOUR_APP_NAME;
 
     # individual nginx logs for this host
-    access_log  /var/log/nginx/YOUR_APP_NAME_assess.log;
+    access_log  /var/log/nginx/YOUR_APP_NAME_access.log;
     error_log   /var/log/nginx/YOUR_APP_NAME_error.log;
 
     location / {
