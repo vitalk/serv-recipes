@@ -17,7 +17,8 @@ server {
         try_files $uri $uri/index.html $uri.html @YOUR_APP_NAME;
     }
 
-    # strips away revision info from static assets (flask-staticutils)
+    # strips away revision info from static assets,
+    # see https://github.com/vitalk/flask-staticutils for more details
     location /static/ {
         rewrite  "^/static/(.*)-[a-zA-Z0-9]{12}\.(css|js)$" /static/$1.$2 break;
         expires 30d;
