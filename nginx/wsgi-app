@@ -46,4 +46,3 @@ server {
         proxy_pass http://YOUR_APP_NAME;
     }
 }
-
