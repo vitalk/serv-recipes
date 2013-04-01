@@ -17,3 +17,8 @@ sed -ie 's/#\?UsePAM no/UsePAM yes/' /etc/ssh/sshd_config
 
 # increase key strength, once your change this regenerate your SSH host keys
 sed -ie 's/#\?ServerKeyBits 768/ServerKeyBits 2048/' /etc/ssh/sshd_config
+service ssh restart
+rm -v /etc/ssh/ssh_host*
+for t in rsa dsa; do
+    ssh-keygen -q -t $t -N '' -f /etc/ssh/ssh_host_${t}_key;
+done
