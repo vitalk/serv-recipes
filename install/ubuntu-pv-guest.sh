@@ -9,7 +9,7 @@
 # to create unique part uses the passed <string> or current machine FQDN
 hex() {
     local unique=$1 || $(hostname -f 2>/dev/null)
-    echo 00163e$($unique | md5sum)
+    echo 00163e$(echo $unique | md5sum)
 }
 
 # Usage: mac <string>
